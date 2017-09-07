@@ -1,0 +1,13 @@
+SELECT DISTINCT lra.userid AS learners, usr.username As usuario, usr.firstname AS Nombre, usr.lastname AS Apellido, c.id AS Curso
+FROM mdl_course AS c
+LEFT JOIN  mdl_context AS ctx ON c.id = ctx.instanceid
+JOIN mdl_role_assignments  AS lra ON lra.contextid = ctx.id
+JOIN mdl_user AS usr ON usr.id = lra.userid
+JOIN mdl_role_assignments  AS tra ON tra.contextid = ctx.id
+JOIN mdl_course_categories AS cats ON c.category = cats.id
+WHERE c.category = cats.id
+AND (
+ cats.path LIKE '%/35'
+ )
+AND lra.roleid=5 
+AND c.id = 152;
